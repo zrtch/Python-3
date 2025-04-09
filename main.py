@@ -1,10 +1,18 @@
+# 变量
+age = 13
+name = 'john'
+print(name)
+
+# 字符串切片
+msg = "Hello, World!"
+print(msg[2:5]) # llo
 
 # 列表
 mylist = []
 mylist.append(1)
 mylist.append(2)
 for item in mylist:
-    print(item)
+    print(item) # 打印输出 1,2
 
 # 判断
 num = 200
@@ -43,3 +51,26 @@ print(counter)
 # f-字符串
 website = 'Quick Reference'
 print(f"Hello, {website}")
+
+# 数据类型
+
+# 字符串
+hello = "Hello World"
+multi_string = """Multiline Strings
+Lorem ipsum dolor sit amet,
+consectetur adipiscing elit """
+print(multi_string)
+
+# 数值
+x = 1    # 整数
+y = 2.8  # 浮点小数
+z = 1j   # 复数
+print(type(x)) # <class 'int'>
+print(type(y)) # <class 'float'>
+print(type(z)) # <class 'complex'>
+
+# 布尔值
+my_bool = True
+my_bool1 = False
+print(bool(0))  # => False
+print(bool(1))  # => True
