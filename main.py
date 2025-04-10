@@ -294,3 +294,25 @@ a1 = a[0:6:2]
 print(a1)  # ['spam', 'bacon', 'ham']
 a2 = a[6:0:-2]
 print(a2)  # ['lobster','tomato','egg']
+
+# ---------判断
+number = int(2)
+if number > 0:
+    print("数字大于0")
+else:
+    print("数字大于0")
+
+# if-else-if
+number = int(0)
+if number < 0:
+    print("您输入了一个负数。")
+elif number == 0:
+    print("您输入了一个 0 。")
+else:
+    print("您输入了一个正数。")
+
+# 三目运算 条件是放在中间
+scope = int(10)
+line = 60
+tip = "及格" if scope >= line else "不及格"
+print(tip)  # 不及格
