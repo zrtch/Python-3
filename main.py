@@ -394,3 +394,67 @@ for n, a in zip(name, age):
 # [表达式 for 变量 in 可迭代对象 if 条件]
 result = [x ** 2 for x in range(10) if x % 2 == 0]
 print(result)  # [0, 4, 16, 36, 64]
+
+
+# -----------函数
+def hello_world():
+    print("hello world")
+
+
+hello_world()
+
+
+# 关键字参数
+def keyword_args(**kwargs):
+    return kwargs
+
+
+arg = keyword_args(big="foot", loch="ness")
+print(arg)  # {'big': 'foot', 'loch': 'ness'}
+
+
+#  返回
+def add(x, y):
+    print(f"{x} + {y} = {x + y}")  # 1 + 2 = 3
+    return x + y
+
+
+num = add(1, 2)
+print(num)  # 3
+
+
+# 返回多个
+def swap(x, y):
+    return y, x
+
+
+x = 1
+y = 2
+x, y = swap(x, y)
+print(x)  # 2
+print(y)  # 1
+
+
+# 位置参数 功能是将传入的所有位置参数打包成元组返回
+def varargs(*args):
+    return args
+
+
+args = varargs(1, 2, 3)
+print(args)  # 元组(1,2,3)
+
+
+# 默认值
+def add(x, y=10):
+    return x + y
+
+
+num = add(5)
+print(num)  # 15
+
+# 匿名函数
+func = (lambda x: x > 2)(3)
+print(func)  # True
+
+num = (lambda x, y: x ** 2 + y ** 2)(2, 1)
+print(num)  # 5
