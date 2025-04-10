@@ -458,3 +458,108 @@ print(func)  # True
 
 num = (lambda x, y: x ** 2 + y ** 2)(2, 1)
 print(num)  # 5
+
+# ----------- 解包: 是将一个 序列 内的多个元素依次重新分配到有限个容器的过程，这只发生在 变量赋值、参数传递 和 生成式生成 过程中。
+
+# 等量解包
+ip, port = "127.0.0.1", 80
+print(ip)  # "127.0.0.1"
+print(port)  # 80
+ip, port = ("127.0.0.1", 8080)
+print(ip)  # "127.0.0.1"
+print(port)  # 80
+
+# 适量解包： _ 也是一个单一变量，不允许解包多个元素，因此变量与值必须一一对应。
+ip, _, port = "127.0.0.1:80".rpartition(":")
+print(ip)  # "127.0.0.1"
+print(port)  # 80
+
+# 过量解包：这里的 * 就是收集序列在解包过程中多出来的元素， 只能有一个，与向函数传递位置参数时的 * 别无二致。
+major, minor, *parts = "3.10.2.beta".split(".")
+print(major)  # -> "3"
+print(minor)  # -> "10"
+print(parts)  # -> ["2", "beta"]
+
+# 解包取左边
+major, minor, *_ = "3.10.2.beta".split(".")
+print(major)  # 3
+print(minor)  # 10
+
+# 解包取两边
+major, *_, level = "3.10.2.beta".split(".")
+print(major)  # 3
+print(level)  # beta
+
+# 解包去右边
+*_, major, level = "3.10.2.beta".split(".")
+print(major)  # 2
+print(level)  # beta
+
+# 解包集合
+a, b, *_ = {3, 2, 1}
+print(a)  # -> 1
+print(b)  # -> 2
+print(_)  # -> [3]
+
+# 解包迭代器
+a, b, *_ = range(3)
+print(a)  # -> 0
+print(b)  # -> 1
+print(_)  # -> [2]
+
+# 解包字典
+a, b, *_ = dict(a=1, b=2, c=3)
+print(a)  # a
+print(_)  # ["c"]
+a, b, *_ = dict(a=1, b=2, c=3).values()
+print(a)  # 1
+print(_)  # [3]
+
+# 生成式中的解包：仅在列表／元组生成式中可以使用多个 *
+chars = (*"abc", *"def", "g", "h")
+print(chars)  # ('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h')
+
+digits = [*range(3), *"abc"]
+print(digits)  # [0, 1, 2, 'a', 'b', 'c']
+
+# 仅在字典生成式中可以使用多个 **
+part = {"小明": 11, "小鹏": 12}
+summary = {"小郑": 13, **part}
+print(summary)  # {'小郑': 13, '小明': 11, '小鹏': 12}
+
+# 迭代中解包
+students = [
+    ("小明", 18),
+    ("小亮", 22),
+]
+
+for k, v in students:
+    print(k, v)
+
+students = [
+    (0, ("小明", 18)),
+    (1, ("小亮", 22)),
+]
+
+for i, (k, v) in students:
+    print(i)  # -> 0、1
+    print(k)  # -> "小明"、"小亮"
+    print(v)  # -> 18、22
+
+
+# 函数中的解包
+def version(major, minor, *parts):
+    print("major", major)  # major 3
+    print("minor", minor)  # minor 10
+    print("parts", parts)  # parts ('2', 'beta', '0')
+
+
+version("3", "10", "2", "beta", "0")
+
+
+def version():
+    parts = "3.10.2.beta.0".split(".")
+    return *parts, "x64"
+
+
+print(version())  # ('3', '10', '2', 'beta', '0', 'x64')
