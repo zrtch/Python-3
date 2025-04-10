@@ -165,3 +165,36 @@ print(isEnd)  # True
 for char in 'foo':
     print(char)
 
+# f-字符串（Python 3.6+）
+website = 'Reference'
+print(f"HELLO, {website}") # "Hello, Reference"
+
+num = 10
+print(f'{num} + 10 = {num + 10}') # '10 + 10 = 20'
+
+# 填充对齐
+# 使用空格填充到指定长度
+print(f'{"text":10}')
+# 向左填充
+print(f'{"text":*>10}')
+# 向右填充
+print(f'{"text":*<10}')
+# 居中填充
+print(f'{"text":*^10}') # '***test***'
+# 使用数字填充
+print(f'{12345:0>10}') # '0000012345'
+
+# 负数
+print(f'{-12345:0=10}') # -000012345
+
+import math
+print(f'{math.pi:.2f}') # '3.14'
+
+# 分组选项
+print(f'{100000:,.2f}') # 100,000.00
+
+# 百分比
+print(f'{0.25:.0%}') # 25%
+
+# 科学计数法
+print(f'{345600000000:e}') # 3.456000e+11
