@@ -316,3 +316,81 @@ scope = int(10)
 line = 60
 tip = "及格" if scope >= line else "不及格"
 print(tip)  # 不及格
+
+# ----- 循环
+primes = [
+    2,
+    3,
+    5,
+]
+for num in primes:
+    print(num)
+
+# 带索引
+animals = ["dog", "cat", "mouse"]
+for i, val in enumerate(animals):
+    print(i, val)
+# 0 dog
+# 1 cat
+# 2 mouse
+
+# while 循环
+x = 0
+while x < 3:
+    print(x)
+    x += 1
+# 0
+# 1
+# 2
+
+
+# 跳出循环
+x = 0
+for index in range(10):
+    x = index * 10
+    if index == 5:
+        break
+    print(x)
+# 0
+# 10
+# 20
+# 30
+# 40
+
+
+# 跳过一轮循环
+for index in range(6, 9):
+    x = index * 10
+    if index == 5:
+        continue
+    print(x)
+# 60
+# 70
+# 80
+
+
+# 范围循环
+for i in range(3):
+    print(i)
+
+for i in range(4, 8):
+    print("范围" + str(i))
+# 4
+# 5
+# 6
+# 7
+
+
+# 使用zip()
+name = ["Pete", "John", "Elizabeth"]
+age = [6, 23, 44]
+for n, a in zip(name, age):
+    print(f"{n} is {a} years old")
+# Pete is 6 years old
+# John is 23 years old
+# Elizabeth is 44 years old
+
+# 列表生成式
+# [表达式 for 变量 in 可迭代对象 if 条件]
+result = [x ** 2 for x in range(10) if x % 2 == 0]
+print(result)  # [0, 4, 16, 36, 64]
