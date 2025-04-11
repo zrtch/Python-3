@@ -799,26 +799,176 @@ obj = Object()
 obj()
 
 # 上下文管理器
-from typing import Any
+# from typing import Any
+#
+#
+# class Object:
+#     def __enter__(self) -> Optional[Any]:
+#         # with 语句会将返回值绑定到 as 子句中的变量，如果有的话。
+#         return
+#
+#     def __exit__(self, exc_type, exc_value, traceback):
+#         # 若 with 内没有发生异常，则三个参数都是 None 。
+#         # 不应该重新引发传入的异常，这是调用者的责任。
+#         pass
+#
+#
+# with Object() as alias:
+#     # 进入 with 之前调用 obj.__enter__() 并得到 alias（如果有返回的话）
+#     pass
+# # 离开 with 后调用 obj.__exit__() ，不管是正常结束还是因异常抛出而离开。
+#
+# # 当需要获取 Object 的对象时可以这样写
+# obj = Object()
+# with obj as alias:
+#     pass
+
+# 类型标注
+string: str = "ha"
+times: int = 3
+print(string * 3)  # hahaha
+
+# 错误的类型标注不会影响正常运行，也不会报错
+result: str = 1 + 2
+print(result)
 
 
-class Object:
-    def __enter__(self) -> Optional[Any]:
-        # with 语句会将返回值绑定到 as 子句中的变量，如果有的话。
-        return
-
-    def __exit__(self, exc_type, exc_value, traceback):
-        # 若 with 内没有发生异常，则三个参数都是 None 。
-        # 不应该重新引发传入的异常，这是调用者的责任。
-        pass
+# 参数
+def say(name: str, start: str = "hi"):
+    return start + "," + name
 
 
-with Object() as alias:
-    # 进入 with 之前调用 obj.__enter__() 并得到 alias（如果有返回的话）
-    pass
-# 离开 with 后调用 obj.__exit__() ，不管是正常结束还是因异常抛出而离开。
+print(say("ngger"))  # hi,ngger
 
-# 当需要获取 Object 的对象时可以这样写
-obj = Object()
-with obj as alias:
-    pass
+
+# 位置参数
+def clac_summary(*args: int):
+    return sum(args)
+
+
+print(clac_summary(3, 1, 2))
+
+
+# 关键字参数
+def calc_sum(**kwargs: int):
+    return sum(kwargs.values())
+
+
+print(calc_sum(a=1, b=2))  # => 3
+
+
+# 属性
+class Employee:
+    name: str
+    age: int
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+        self.graduated: bool = False
+
+
+# 返回值
+def say_hello(name) -> str:
+    return f"Hello, {name}"
+
+
+var = "python"
+print(say_hello(var))  # Hello, python
+
+# 多种可能的返回值
+from typing import Union
+
+
+def resp200(meaningful) -> Union[int, str]:
+    return "ok" if meaningful else "200"
+
+
+print(resp200(20))  # ok
+
+
+# 返回多个值
+def resp200() -> (int, str):
+    return 200, "ok"
+
+
+# 多种可能的返回值
+def resp200(meaningful) -> Union[int, str]:
+    return "ok" if meaningful else "200"
+
+
+print(resp200(123))  # ok
+
+
+# 标注自己
+class Employee:
+    name: str
+    age: int
+
+    def set_name(self, name) -> "employee":
+        self.name = name
+        return self
+
+
+# 标注自己 3.11+
+from typing import Self
+
+
+class Emlpyee:
+    name: str
+    age: int
+
+    def set_name(self: Self, name) -> Self:
+        self.name = name
+        return self
+
+
+# 标注一个值为类型的参数
+from typing import TypeVar, Type
+
+T = TypeVar("T")
+
+
+# "mapper" 的值是一个像 int、str、MyClass 这样的类型
+# "default" 是一个 T 类型的值，比如 314、"string"、MyClass()
+# 函数的返回值也是一个 T 类型的值
+def converter(raw, mapper: Type[T], default: T) -> T:
+    try:
+        return mapper(raw)
+    except:
+        return default
+
+
+raw: str = input("请输入一个证书")
+result: int = converter(raw, mapper=int, default=0)
+
+# 这是单行注释
+""" 可以写多行字符串
+    使用三个"，并且经常使用
+    作为文档。
+"""
+
+
+# 生成器
+def double_numbers(iterable):
+    for i in iterable:
+        yield i + i
+
+
+# 要列出的生成器
+values = (-x for x in [1, 2, 3, 4, 5])
+gen_to_list = list(values)
+print(gen_to_list)
+
+# 处理异常
+try:
+    # 使用“raise”来引发错误
+    raise IndexError("这是一个索引错误")
+except IndexError as e:
+    pass  # pass只是一个空操作。 通常你会在这里做恢复。
+except (TypeError, NameError):
+    pass  # 如果需要，可以一起处理多个异常。
+else:  # try/except 块的可选子句。 必须遵循除块之外的所有内容
+    print("All good!")  # 仅当 try 中的代码未引发异常时运行
+finally:  # 在所有情况下执行
+    print("我们可以在这里清理资源")
