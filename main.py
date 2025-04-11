@@ -770,3 +770,55 @@ YOKI.sound()
 # 用户定义的异常
 class CustomError(Exception):
     pass
+
+
+# --------- 数据类型
+# 自定义类创建
+from typing import Any
+
+
+class Object:
+    def __new__(cls, *args, **kwargs) -> "self":
+        # new 和 init 声明的参数必须一致
+        # 或者用 *args 和 **kwargs 进行兼容
+        return object.__new__(cls)
+
+    def __init__(self, *args, **kwargs):
+        # 初始化方法没有返回值，也不能返回值。
+        pass
+
+    def __call__(self, *args, **kwargs) -> Any:
+        pass
+
+
+# 依次调用了 new 和 init，所以如果
+# 手动调用 new，那么别忘了调用 init
+obj = Object()
+
+# 触发 __call__ 方法，要给什么参数取决于声明
+obj()
+
+# 上下文管理器
+from typing import Any
+
+
+class Object:
+    def __enter__(self) -> Optional[Any]:
+        # with 语句会将返回值绑定到 as 子句中的变量，如果有的话。
+        return
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        # 若 with 内没有发生异常，则三个参数都是 None 。
+        # 不应该重新引发传入的异常，这是调用者的责任。
+        pass
+
+
+with Object() as alias:
+    # 进入 with 之前调用 obj.__enter__() 并得到 alias（如果有返回的话）
+    pass
+# 离开 with 后调用 obj.__exit__() ，不管是正常结束还是因异常抛出而离开。
+
+# 当需要获取 Object 的对象时可以这样写
+obj = Object()
+with obj as alias:
+    pass
