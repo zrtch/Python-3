@@ -563,3 +563,29 @@ def version():
 
 
 print(version())  # ('3', '10', '2', 'beta', '0', 'x64')
+
+# ---------- 模块
+# 导入模块
+import math
+
+print(math.sqrt(16))  # 4.0
+
+# 从一个模块导入
+from math import ceil, floor
+
+print(ceil(3.7))  # 4
+print(floor(3.7))  # 3
+
+# 导入一个模块的全部
+
+# 给模块起别名
+import math as m
+
+# math.sqrt(16) == m.sqrt(16)
+print(math.sqrt(16))  # True
+print(m.sqrt(16))  # True
+
+# 浏览模块的函数和属性
+import math
+
+dir(math)
