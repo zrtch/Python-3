@@ -38,7 +38,7 @@ def my_function():
 my_function()
 
 # 文件处理
-with open("C:/TEXT.txt", "r", encoding="utf-8") as file:
+with open("C:/TEST.txt", "r", encoding="utf-8") as file:
     for line in file:
         print(line)
 
@@ -175,13 +175,13 @@ print(f"{num} + 10 = {num + 10}")  # '10 + 10 = 20'
 
 # 填充对齐
 # 使用空格填充到指定长度
-print(f'{"text":10}')
+print(f'{"TEST":10}')
 # 向左填充
-print(f'{"text":*>10}')
+print(f'{"TEST":*>10}')
 # 向右填充
-print(f'{"text":*<10}')
+print(f'{"TEST":*<10}')
 # 居中填充
-print(f'{"text":*^10}')  # '***test***'
+print(f'{"TEST":*^10}')  # '***test***'
 # 使用数字填充
 print(f"{12345:0>10}")  # '0000012345'
 
@@ -589,3 +589,52 @@ print(m.sqrt(16))  # True
 import math
 
 dir(math)
+
+# --------- 文件处理
+# 逐行
+with open("C:/TEST.txt", "r", encoding="utf-8") as file:
+    for line in file:
+        print(line)
+
+# 带行号
+file = open("C:/TEST.txt", "r", encoding="utf-8")
+for i, line in enumerate(file, start=1):
+    print("Number %s: %s" % (i, line))
+
+# 写入字符串
+contents = {"a": 12, "b": 13}
+with open("C:/TEST.txt", "w+") as file:
+    file.write(str(contents))
+
+# 读取字符串
+with open("C:/TEST.txt", "r+") as file:
+    contents = file.read()
+print(contents)
+
+# 写入一对象
+# contents = {"a": 12, "b": 13}
+# with open("C:/TEST.txt", "w+") as file:
+#     file.write(json.dumps(contents))
+#
+# # 读取对象
+# with open("C:/TEST.txt", "r+") as file:
+#     contents = json.load(file)
+# print(contents)
+
+# 删除文件
+# import os
+#
+# os.remove("C:/TEST.txt")
+
+# 检查和删除
+import os
+
+if os.path.exists("C:/TEST1.txt"):
+    os.remove("C:/TEST1.txt")
+else:
+    print("The file does not exist")
+
+# 删除文件夹
+import os
+
+os.rmdir("C:/test")
