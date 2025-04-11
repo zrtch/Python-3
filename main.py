@@ -1,4 +1,5 @@
 # 变量
+
 age = 13
 name = "john"
 print(name)
@@ -634,7 +635,138 @@ if os.path.exists("C:/TEST1.txt"):
 else:
     print("The file does not exist")
 
-# 删除文件夹
-import os
 
-os.rmdir("C:/test")
+# 删除文件夹
+# import os
+#
+# os.rmdir("C:/test")
+
+
+# ---------- 类和继承
+# 定义
+class MyClass:
+    pass
+
+
+my = MyClass()  # 类的实例化
+
+
+# 构造函数
+class Animal:
+    def __init__(self, voice):
+        self.voice = voice
+
+
+cat = Animal("Meow")
+print(cat.voice)  # => Meow
+
+dog = Animal("Woof")
+print(dog.voice)  # => Woof
+
+
+# 方法
+class Dog:
+    def bark(self):
+        print("ha-ha")
+
+
+charlie = Dog()
+charlie.bark()  # ha-ha
+
+
+# 类变量
+class MyClass:
+    class_variable = "a class variable"
+
+
+print(MyClass.class_variable)  # a class variable
+x = MyClass()
+
+print(x.class_variable)  # a class variable
+
+
+# super函数
+class ParentClass:
+    def print_test(self):
+        print("Parent Method")
+
+
+class ChildClass(ParentClass):
+    def print_test(self):
+        print("Child Method")
+        # 调用父级的 print_test()
+        super().print_test()
+
+
+child_child = ChildClass()
+child_child.print_test()
+
+
+# repr方法
+class Employee:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def __repr__(self):
+        return self.name + " is " + str(self.age)
+
+
+john = Employee("john", 18)
+print(john)  # john is 18
+
+
+# 多态性
+class ParentClass:
+    def print_test(self):
+        print("A")
+
+
+class ChildClass(ParentClass):
+    def print_test(self):
+        print("B")
+
+
+OBJ_A = ParentClass()
+OBJ_B = ChildClass()
+
+OBJ_A.print_test()
+OBJ_B.print_test()
+
+
+# 重写
+class ParentClass:
+    def print_test(self):
+        print("Parent")
+
+
+class ChildClass(ParentClass):
+    def print_test(self):
+        print("Child")
+
+
+child_int = ChildClass()
+child_int.print_test()  # Child
+
+
+# 继承
+class Animal:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+
+class Dog(Animal):
+    def sound(self):
+        print("WOOF")
+
+
+YOKI = Dog("yoki", 12)
+print(YOKI.name)  # yoki
+print(YOKI.age)  # 12
+YOKI.sound()
+
+
+# 用户定义的异常
+class CustomError(Exception):
+    pass
